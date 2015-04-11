@@ -262,6 +262,10 @@ class Query(object):
             if cur:
                 self._dbconnection.rollback()
 
+    def to_chn_str(self, str):
+        """decode the utf8 characters"""
+        return str.decode('gbk')
+
     def __execute_sql(self, cur, sqlStatement):
         logger.debug("Executing : %s" % sqlStatement)
         return cur.execute(sqlStatement)
