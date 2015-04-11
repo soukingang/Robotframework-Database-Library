@@ -99,6 +99,9 @@ class ConnectionManager(object):
 
         | # for JayDeBeApi |
         | Connect To Database Using Custom Params | JayDeBeApi | 'oracle.jdbc.driver.OracleDriver', 'my_db_test', 'system', 's3cr3t' |
+        
+        | # for Sqlite3 (add By Qitao016) |
+        | Connect To Database Using Custom Params | sqlite3 | 'demo.db' |
         """
         db_api_2 = __import__(dbapiModuleName)
 
