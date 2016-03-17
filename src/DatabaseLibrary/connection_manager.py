@@ -65,7 +65,7 @@ class ConnectionManager(object):
         dbapiModuleName = dbapiModuleName or config.get('default', 'dbapiModuleName')
         dbName = dbName or config.get('default', 'dbName')
         dbUsername = dbUsername or config.get('default', 'dbUsername')
-        dbPassword = dbPassword or config.get('default', 'dbPassword')
+        dbPassword = dbPassword if dbPassword is not None else config.get('default', 'dbPassword')
         dbHost = dbHost or config.get('default', 'dbHost') or 'localhost'
         dbPort = int(dbPort or config.get('default', 'dbPort'))
 
@@ -84,6 +84,10 @@ class ConnectionManager(object):
             dbPort = dbPort or 1433
             logger.debug ('Connecting using : %s.connect(DRIVER={SQL Server};SERVER=%s,%s;DATABASE=%s;UID=%s;PWD=%s)' % (dbapiModuleName,dbHost,dbPort,dbName,dbPort,dbUsername, dbPassword))
             self._dbconnection = db_api_2.connect('DRIVER={SQL Server};SERVER=%s,%s;DATABASE=%s;UID=%s;PWD=%s'%(dbHost,dbPort,dbName,dbUsername,dbPassword))
+        elif dbapiModuleName in ["ibm_db", "ibm_db_dbi"]:
+            dbPort = dbPort or 50000            
+            logger.debug ('Connecting using : %s.connect(DATABASE=%s;HOSTNAME=%s;PORT=%s;PROTOCOL=TCPIP;UID=%s;PWD=%s;) ' % (dbapiModuleName, dbName, dbHost, dbPort, dbUsername, dbPassword))
+            self._dbconnection = db_api_2.connect ('DATABASE=%s;HOSTNAME=%s;PORT=%s;PROTOCOL=TCPIP;UID=%s;PWD=%s;' % (dbName, dbHost, dbPort, dbUsername, dbPassword), '', '')
         else:
             logger.debug ('Connecting using : %s.connect(database=%s, user=%s, password=%s, host=%s, port=%s) ' % (dbapiModuleName, dbName, dbUsername, dbPassword, dbHost, dbPort))
             self._dbconnection = db_api_2.connect (database=dbName, user=dbUsername, password=dbPassword, host=dbHost, port=dbPort)
