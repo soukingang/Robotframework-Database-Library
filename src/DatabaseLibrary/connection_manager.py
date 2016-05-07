@@ -14,6 +14,7 @@
 
 import ConfigParser
 from robot.api import logger
+import sys
 
 class ConnectionManager(object):
     """
@@ -108,6 +109,9 @@ class ConnectionManager(object):
         | Connect To Database Using Custom Params | sqlite3 | 'demo.db' |
         """
         db_api_2 = __import__(dbapiModuleName)
+
+        if dbapiModuleName in ["sqlite3"] and sys.platform.startswith('win'):
+            db_connect_string = db_connect_string.replace('\\','\\\\')
 
         db_connect_string = 'db_api_2.connect(%s)' % db_connect_string
 
