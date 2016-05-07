@@ -19,20 +19,21 @@
 
 from distutils.core import setup
 
-import sys, os
-src_path = os.path.join(os.path.dirname(__file__), 'src')
-sys.path.insert(0, src_path)
-
-__version_file_path__ = os.path.join(src_path, 'DatabaseLibrary', 'VERSION')
-__version__ = open(__version_file_path__, 'r').read().strip()
+import sys
+from os.path import join, dirname
+sys.path.append(join(dirname(__file__), 'src'))
+from ez_setup import use_setuptools
+use_setuptools()
+from setuptools import setup
+execfile(join(dirname(__file__), 'src', 'DatabaseLibrary', 'version.py'))
 
 def main():
-    setup(name         = 'robotframework-databaselibrary',
-          version      = __version__,
+    setup(name         = 'robotframework-databaseslibrary',
+          version      = VERSION,
           description  = 'Database utility library for Robot Framework',
-          author       = 'Franz Allan Valencia See',
-          author_email = 'franz.see@gmail.com',
-          url          = 'https://github.com/franz-see/Robotframework-Database-Library',
+          author       = 'qitaos',
+          author_email = 'qitaos@gmail.com',
+          url          = 'https://github.com/qitaos/Robotframework-Database-Library/',
           package_dir  = { '' : 'src'},
           packages     = ['DatabaseLibrary'],
           package_data={'DatabaseLibrary': ['VERSION']},

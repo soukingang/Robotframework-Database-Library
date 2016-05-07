@@ -18,8 +18,10 @@ from connection_manager import ConnectionManager
 from query import Query
 from assertion import Assertion
 
-__version_file_path__ = os.path.join(os.path.dirname(__file__), 'VERSION')
-__version__ = open(__version_file_path__, 'r').read().strip()
+THIS_DIR = os.path.dirname(os.path.abspath(__file__))
+execfile(os.path.join(THIS_DIR, 'version.py'))
+
+__version__ = VERSION
 
 class DatabaseLibrary(ConnectionManager, Query, Assertion):
     """
