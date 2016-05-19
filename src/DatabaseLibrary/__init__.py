@@ -14,12 +14,9 @@
 
 import os
 
-from connection_manager import ConnectionManager
-from query import Query
-from assertion import Assertion
-
-THIS_DIR = os.path.dirname(os.path.abspath(__file__))
-execfile(os.path.join(THIS_DIR, 'version.py'))
+from .connection_manager import ConnectionManager
+from .query import Query
+from .assertion import Assertion
 
 __version__ = VERSION
 
