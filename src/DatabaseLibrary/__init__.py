@@ -17,7 +17,9 @@ import os
 from .connection_manager import ConnectionManager
 from .query import Query
 from .assertion import Assertion
+from .VERSION import VERSION
 
+__version__ = VERSION
 
 class DatabaseLibrary(ConnectionManager, Query, Assertion):
     """
