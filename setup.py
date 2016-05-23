@@ -19,10 +19,11 @@
 
 import sys
 from os.path import abspath, dirname, join
+sys.path.append(join(dirname(__file__), 'src'))
+
 from ez_setup import use_setuptools
 from setuptools import setup
 
-sys.path.append(join(dirname(__file__), 'src'))
 use_setuptools()
 version_file = join(dirname(__file__), 'src', 'DatabaseLibrary', 'VERSION.py')
 exec(compile(open(version_file).read(), version_file, 'exec'))
@@ -31,9 +32,9 @@ def main():
     setup(name         = 'robotframework-databaseslibrary',
           version      = VERSION,
           description  = 'Database utility library for Robot Framework',
-          author       = 'soukingang',
-          author_email = 'soukingang@gmail.com',
-          url          = 'https://github.com/soukingang/Robotframework-Database-Library/',
+          author       = 'qitaos',
+          author_email = 'qitaos@gmail.com',
+          url          = 'https://github.com/qitaos/Robotframework-Database-Library/',
           package_dir  = { '' : 'src'},
           packages     = ['DatabaseLibrary'],
           package_data={'DatabaseLibrary': ['VERSION']},
